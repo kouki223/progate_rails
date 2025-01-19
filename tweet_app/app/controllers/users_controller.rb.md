@@ -1,0 +1,26 @@
+- users_controller.rb
+  - ApplicationControllerクラスをUsersControllerクラスがクラスの継承をしている
+  - before_action
+    - authenticate_user
+      - only(index,show,edit,update)
+        - onlyで指定したアクションが呼び出される時にまずauthenticate_userを実行する
+    - forbid_login_user
+      - only(new,create,login_from,login)
+        - onlyで指定したアクションが呼び出される時にまずorbid_login_userを実行する
+    - ensure_correct_user
+      - only(edit,update)
+        - onlyで指定したアクションが呼び出される時にまずensure_correct_userを実行する
+  - メソッド
+    - index
+      - 変数@userに対してapplication recordを継承したUser classのallメソッドを使いUserモデルを介してusersテーブルのレコードを全て取得して代入している
+    - show
+      - @userに対して、find_byメソッドの引数がidがparams[:id]の
+    - new
+    - create
+    - edit
+    - update
+    - login_form
+    - login
+    - logout
+    - likes
+    - ensure_correct_user

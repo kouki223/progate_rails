@@ -1,0 +1,11 @@
+- routes.rb
+  - get "users/index" => "users#index"
+    - get "users/index"
+      - HTTPメソッドはgetメソッドでURLがusers/indexの場合
+    - "users#index"
+      - uesrsコントローラー内のindexアクション（メソッド）を返すルーティング
+  - get "/signup" => "users#new"
+    - get "/signup"
+      - HTTPメソッドがgetでURLが/signupの場合
+    - "users#new"
+      - usersコントローラー内のnewアクションを返すルーティング
