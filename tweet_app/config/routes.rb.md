@@ -9,3 +9,78 @@
       - HTTPメソッドがgetでURLが/signupの場合
     - "users#new"
       - usersコントローラー内のnewアクションを返すルーティング
+  - post "users/create" => "users#create"
+    - post "users/create"
+      - HTTPメソッドがpostでURLがusers/createの場合
+    - "users#create"
+      - usersコントローラー内のcreateアクションを返すルーティング
+  - get "users/:id/edit" =>"users#edit"
+    - get "users/:id/edit" 
+      -HTTPメソッドがgetでURLがusers/:id/editの場合
+    - "users#edit"
+      - usersコントローラー内のeditアクションを返すルーティング
+  - post "users/:id/update" => "users#update"
+    - post "users/:id/update"
+      - HTTPメソッドがpostでURLがusers/:id/updateの場合
+    - "users#update"
+      - usersコントローラー内のupdateアクションを返すルーティング
+  - get "login" => "users#login_form"
+    - get "login"
+      - HTTPメソッドがgetでURLがloginの場合
+    - "users#login_form"
+      - usersコントローラー内のlogin_formアクションを返すルーティング
+  - post "login" => "users#login"
+    - post "login"
+      - HTTPメソッドがpostでURLがloginの場合
+    - "users#login"
+      - usersコントローラー内のloginアクションを返すルーティング
+  - post "logout" => "users#logout"
+    - post "logout"
+      - HTTPメソッドがpostでURLがlogoutの場合
+    - "users#logout"
+      - usersコントローラー内のlogoutアクションを返すルーティング
+  - get "users/:id/likes" => "users#likes"
+    - get "users/:id/likes"
+      - HTTPメソッドがgetでURLがusers/:id/likesの場合
+    - "users#likes"
+      - usersコントローラー内のlikesアクションを返すルーティング
+  - get "users/:id" => "users#show"
+    - get "users/:id"
+      - HTTPメソッドがgetでURLがusers/:idの場合
+    - "users#show"
+      - usersコントローラー内のshowアクションを返すルーティング
+  - get "posts/index" => "posts#index"
+    - get "posts/index"
+      - HTTPメソッドがgetでURLがposts/indexの場合
+    - "posts#index"
+      - postsコントローラー内の
+  - get "posts/new" => "posts#new"
+    - get "posts/new"
+    - "posts#new"
+  - post "posts/create" => "posts#create"
+    - post "posts/create"
+    - "posts#create"
+  - get "posts/:id/edit" => "posts#edit"
+    - get "posts/:id/edit"
+    - "posts#edit"
+  - post "posts/:id/update" => "posts#update"
+    - post "posts/:id/update"
+    - "posts#update"
+  - post "posts/:id/destroy" => "posts#destroy"
+    - post "posts/:id/destroy" 
+    - "posts#destroy"
+  - get "posts/:id" => "posts#show" 
+    - get "posts/:id"
+    - "posts#show" 
+  - get "/" => "home#top"
+    - get "/" 
+    - "home#top"
+  - get "/about" => "home#about"
+    - get "/about"
+    - "home#about"
+  - post "likes/:post_id/create" => "likes#create"
+    - post "likes/:post_id/create"
+    - "likes#create"
+  - post "likes/:post_id/destroy" => "likes#destroy"
+    - post "likes/:post_id/destroy"
+    - "likes#destroy"
