@@ -53,34 +53,54 @@
     - get "posts/index"
       - HTTPメソッドがgetでURLがposts/indexの場合
     - "posts#index"
-      - postsコントローラー内の
+      - postsコントローラー内のindexアクションを返すルーティング
   - get "posts/new" => "posts#new"
     - get "posts/new"
+      - HTTPメソッドがgetでURLがposts/newの場合
     - "posts#new"
+      - postsコントローラー内のnewアクションを返すルーティング
   - post "posts/create" => "posts#create"
     - post "posts/create"
+      - HTTPメソッドがpostでURLがposts/createの場合
     - "posts#create"
+      - postsコントローラー内のcreateアクションを返すルーティング
   - get "posts/:id/edit" => "posts#edit"
     - get "posts/:id/edit"
+      - HTTPメソッドがgetでURLがposts/:id/editの場合
     - "posts#edit"
+      - postsコントローラー内のeditアクションを返すルーティング
   - post "posts/:id/update" => "posts#update"
     - post "posts/:id/update"
+      - HTTPメソッドがpostでURLがposts/:id/updateの場合
     - "posts#update"
+      - postsコントローラー内のupdateアクションを返すルーティング
   - post "posts/:id/destroy" => "posts#destroy"
     - post "posts/:id/destroy" 
+      - HTTPメソッドがpostでURLがposts/:id/destroyの場合
     - "posts#destroy"
+      - postsコントローラー内のdestroyアクションを返すルーティング
   - get "posts/:id" => "posts#show" 
     - get "posts/:id"
+      - HTTPメソッドがgetでURLがposts/:idの場合
     - "posts#show" 
+      - postsコントローラー内のshowアクションを返すルーティング
   - get "/" => "home#top"
     - get "/" 
+      - HTTPメソッドがgetでURLが/の場合
     - "home#top"
+      - homeコントローラー内のtopアクションを返すルーティング
   - get "/about" => "home#about"
     - get "/about"
+      - HTTPメソッドがgetでURLが/aboutの場合
     - "home#about"
+      - homeコントローラーのaboutアクションを返すルーティング
   - post "likes/:post_id/create" => "likes#create"
     - post "likes/:post_id/create"
+      - HTTPメソッドがpostでURLがlikes/:post_id/createの場合
     - "likes#create"
+      - likesコントローラー内のcreateアクションを返すルーティング
   - post "likes/:post_id/destroy" => "likes#destroy"
     - post "likes/:post_id/destroy"
+      - HTTPメソッドがpostでURLがlikes/:post_id/destroyの場合
     - "likes#destroy"
+      - likesコントローラー内のdestroyアクションを返すルーティング
