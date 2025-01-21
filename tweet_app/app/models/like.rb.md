@@ -1,0 +1,6 @@
+- ActiveRecord::Base classを継承したApplicationRecord classを継承したlike class
+  - validates
+    - user_id, {presence: true}
+      - user_idカラムに対して存在するかどうか？バリデーションをかける
+    - post_id, {presence: true}
+      - post_idカラムに対して存在するかどうか？バリデーションをかける
