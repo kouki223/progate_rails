@@ -1,16 +1,3 @@
 - application_record.rb
-- ActionController::Base classを継承したApplicationController
-  - before_action
-    - set_current_user
-
-  - メソッド
-    - set_current_user
-      - 変数@current_userに対して、application recordを継承したuser classのfind_byメソッドを活用して引数がid: session[:user_id]の際に取得されるレコードを代入する
-    - authenticate_user
-      - もし、変数@current_userがnilと同じ場合には
-        - flash[:notice]に"ログインが必要です"を代入する
-        - "/login"にリダイレクトする
-    - forbid_login_user
-      - もし、@current_userがtrueの場合には
-        - flash[:notice]に"すでにログインしています"を代入する
-        - "/posts/index"にリダイレクトする
+- ActiveRecord::Base classを継承したApplicationRecord class
+  - モデルの中で対応するDBが存在しない場合に記載するものらしい
