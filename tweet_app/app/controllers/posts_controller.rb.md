@@ -1,0 +1,44 @@
+- posts_controller.rb
+- ActionController::Baseを継承したApplicationControllerクラスを継承したPostsControllerクラス
+
+  - before_action
+    - authenticate_user
+    - ensure_correct_user
+      - edit,update,destroyアクションが実行される前に実行される
+
+  - メソッド
+    - index
+      - 変数@postsにapplication recordを継承したPostclassのallメソッドを活用してpostモデルを介して全てのレコードを配列にして代入する。この時、orderメソッドを活用して降順に並び替える
+    - show
+      - 変数＠postにapplication recordを継承したPostclassのfind_byメソッドを活用して引数がid: params[:id]の際に取得されるレコードを代入する
+      - 変数＠userに変数＠postのuserカラムを代入する
+      - 変数@likes_countにapplication recordを継承したlike classのwhereメソッドを活用してpost_id: @post.idに一致するレコード数をカウントして代入する。
+    - new
+      - 変数＠postに対してapplication recordを継承したPostclassのnewメソッドを活用して新しいインスタンスを作成して代入する。
+    - create
+      - 変数＠postに対してapplication recordを継承したPostclassのnewメソッドを活用して新しいインスタンスを引数がcontentカラムがparams[:content]、user_idカラムが@current_user.idとして作成し代入する。
+      - もし、@post.saveがtrueの場合には
+        - flash[:notice]に"投稿を作成しました"を代入する
+        - "/posts/index"にリダイレクトする
+      - true以外の場合には
+        - "posts/new"にrenderするようにする
+    - edit
+      - 変数＠postに対してapplication recordを継承したPostclassのfind_byメソッドを活用して引数がid: params[:id]の際に取得されるレコードを代入する
+    - update
+      - 変数＠postに対してapplication recordを継承したPostclassのfind_byメソッドを活用して引数がid: params[:id]の際に取得されるレコードを代入する
+      - 変数＠postのcontentカラムにparams[:content]を代入する
+      - もし、@post.saveがtrueの場合には
+        - flash[:notice]に"投稿を編集しました"を代入する
+        - "/posts/index"にリダイレクトする
+      - true以外の場合には
+        - "posts/edit"へrenderする
+    - destroy
+      - 変数＠postに対してapplication recordを継承したPostclassのfind_byメソッドを活用して引数がid: params[:id]の際に取得されるレコードを代入する
+      - 変数＠postに対してapplication recordを継承したPostclassのdestroyメソッドを実行する
+      - flash[:notice]に "投稿を削除しました"を代入する
+      - "/posts/index"にリダイレクトする
+    - ensure_correct_user
+      - 変数＠postに対してapplication recordを継承したPostclassのfind_byメソッドを活用して引数がid: params[:id]の際に取得されるレコードを代入する
+      - もし、@post.user_idと@current_user.idが異なる場合には
+        - flash[:notice]に"権限がありません"を代入する
+        - "/posts/index"にリダイレクトする
