@@ -1,0 +1,9 @@
+- application.html
+  - html宣言
+    - html開始タグ
+      - head開始タグ
+        - title開始タグ　Hello titel終了タグ
+      - head終了タグ
+      - body開始タグ
+      - body終了タグ
+    - html終了タグ
