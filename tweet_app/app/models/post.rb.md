@@ -7,4 +7,4 @@
       - user_idカラムが存在するか？
 - メソッド
   - user
-    - Application recordを継承したuserclassのfind_byメソッドを活用して引数がid: self.user_idの場合に取得されるレコードを戻り値として返す
+    - Application recordを継承したuserclassのfind_byメソッドを活用して引数がid: self.user_idの場合に取得されるレコードをUserモデルを介して戻り値として返す
