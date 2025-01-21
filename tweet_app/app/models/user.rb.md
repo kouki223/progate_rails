@@ -1,0 +1,10 @@
+- user.rb
+- ctiveRecord::Base classを継承したApplicationRecord classを継承したUser class
+  - validates
+    - name, {presence: true}
+      - nameカラムが存在するか確認する
+    - email, {presence: true, uniqueness: true}
+      - emailカラムが存在するのか確認する。
+  - メソッド
+    - posts
+      - application recordを継承したUser classのwhereメソッドを活用して条件がuser_id: self.idに一致するレコードをpostモデルを介して取得して戻り値として返す
