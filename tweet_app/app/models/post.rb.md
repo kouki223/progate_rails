@@ -1,0 +1,10 @@
+- post.rb
+- ActiveRecord::Base classを継承したApplicationRecord classを継承したpost class
+  - validates
+    - content, {presence: true, length: {maximum: 140}}
+      - contentカラムが存在するか？文字数のMAXは140文字
+    - user_id, {presence: true}
+      - user_idカラムが存在するか？
+- メソッド
+  - user
+    - Application recordを継承したuserclassのfind_byメソッドを活用して引数がid: self.user_idの場合に取得されるレコードを戻り値として返す
