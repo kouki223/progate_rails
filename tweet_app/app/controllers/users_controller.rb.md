@@ -12,15 +12,54 @@
         - onlyで指定したアクションが呼び出される時にまずensure_correct_userを実行する
   - メソッド
     - index
-      - 変数@userに対してapplication recordを継承したUser classのallメソッドを使いUserモデルを介してusersテーブルのレコードを全て取得して代入している
+      - 変数@userに対してapplication recordを継承したUser classのallメソッドを使いUserモデルを介してusersテーブルのレコードを全て取得し、配列にして代入している
     - show
-      - @userに対して、find_byメソッドの引数がidがparams[:id]の
+      - 変数@userに対してapplication recordを継承したUser classの find_byメソッドを活用して引数がid：params[:id]の場合にUserモデルを介して取得されるレコードを代入している
     - new
+      - 変数＠userに対してapplication recordを継承したUser classのnewメソッドを使って新しいインスタンスを作成して代入している
     - create
+      - 変数＠userに対してapplication recordを継承したUser classのnewメソッドを使って新しいインスタンスを作成する。この時、引数としてnameカラムにはparams[:name]をemailカラムにはparams[:email]を、image_nameカラムには default_user.jpgを、passwordカラムにはparams[:password]を設定する。
+      - もし、変数＠userに対してapplication recordを継承したUser classのsaveメソッドを使いデータベースへの保存が成功した場合には
+        - 変数sessionを活用して、キーが[:user_id]で代入される値が@user.idとしてsessionへ保存されるようにする。
+        - 特殊な変数flash[:notice]に"ユーザー情報を編集しました"を代入する
+        - /users/#{@user.id}へリダイレクトするようにする。
+      - 保存が成功する以外の場合には、users/newにrenderするようにする事で直接Viewが表示されるようにする。
     - edit
+      - 変数＠userに対してapplication recordを継承したUser classの find_byメソッドを活用して引数がid：params[:id]の場合にUserモデルを介して取得されるレコードを代入している。
     - update
+      - 変数＠userに対してapplication recordを継承したUser classの find_byメソッドを活用して引数がid：params[:id]の場合にUserモデルを介して取得されるレコードを代入する
+      - 変数＠userのnameカラムに特殊な変数params[:name]を代入する
+      - 変数＠userのemailカラムに特殊な変数params[:name]を代入する
+      - もし、params[:image]がtrueの場合
+        - 変数＠userのimage_nameに"#{@user.id}.jpg"を代入する
+        - imageにparams[:image]を代入する
+        - Fileクラス内のbinwriteメソッドを活用して"public/user_images/#{@user.image_name}"へimageに対してreadメソッドを活用したものを保存する
+      - もし、＠user.saveがtrueの場合、
+        - 特殊な変数flash[:notice]にに対して"ユーザー情報を編集しました"を代入する
+        - "/users/#{params[:id]}"にリダイレクトされるようにする
+      - その他であれば
+        - "users/edit"へrenderされるようにする
     - login_form
+
     - login
+      - 変数@userに対してapplication recordを継承したUser classの find_byメソッドを活用して引数がemail： params[:email]の場合にUserモデルを介して取得されるレコードを代入する。
+      - もし、@userと、@userとauthenticateメソッドを活用して(params[:password])がハッシュ化されたパスワードが一致するか確認する。trueであれば
+        - 変数sessionを活用して、キーが[:user_id]で代入される値が@user.idとしてsessionへ保存されるようにする。
+        - 特殊な変数flash[:notice]に対して"ログインしました"を代入する
+        - "/posts/index"にリダイレクトする
+      - true以外であれば、
+        - @error_messageに"メールアドレスまたはパスワードが間違っています"を代入する
+        - ＠emailにparams[:email]を代入する
+        - @passwordにparams[:password]を代入する
+        - "users/login_form"にrenderされて直接Viewが表示されるようにする
     - logout
+      - session[:user_id]にnillを代入する
+      - flash[:notice]に"ログアウトしました"を代入する
+      - "/login"にリダイレクトする
     - likes
+      - 変数＠userに対してapplication recordを継承したUser classのfind_byメソッドを活用して引数がid：params[:id]の場合にUserモデルを介して取得されるレコードを代入する
+      - 変数＠likesに対してapplication recordを継承したLike classのwhereメソッドを活用して引数がuser_id: @user.idの条件に一致するレコードを代入する
     - ensure_correct_user
+      - もし、@current_user.idとparams[:id].to_iが異なる場合には
+        - flash[:notice]に"権限がありません"を代入する
+        - "/posts/index"にリダイレクトする
