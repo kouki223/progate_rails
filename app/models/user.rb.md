@@ -1,10 +1,14 @@
 - user.rb
-- ctiveRecord::Base classを継承したApplicationRecord classを継承したUser class
+- ApplicationRecord classを継承したUser class
+  - has_secure_password
+    - パスワードをハッシュ化してデータベースへ保存するメソッド
   - validates
     - name, {presence: true}
-      - nameカラムが存在するか確認する
+      - nameカラムが存在する場合にはデータベースへ保存する
     - email, {presence: true, uniqueness: true}
-      - emailカラムが存在するのか確認する。
+      - emailカラムが存在する、他と被っていない場合にはデータベースへ保存する
   - メソッド
     - posts
-      - application recordを継承したUser classのwhereメソッドを活用して条件がuser_id: self.idに一致するレコードをpostモデルを介して取得して戻り値として返す
+      - return
+        - User classのwhereメソッドを活用して条件がuser_idカラムがself.idに一致するレコードをPostモデルを介して取得して戻り値として返す
+          - selfはオブジェクト自身の事
