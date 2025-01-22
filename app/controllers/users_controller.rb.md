@@ -59,8 +59,8 @@
     - login_form
       - login_form.html.erbをViewへ渡す
     - login
-      - 変数@userに対してapplication recordを継承したUser classの find_byメソッドを活用して引数がemail： params[:email]の場合にUserモデルを介して取得されるレコードを代入する。
-      - もし、@userと、@userとauthenticateメソッドを活用して(params[:password])がハッシュ化されたパスワードが一致するか確認する。trueであれば
+      1. 変数@userに対してapplication recordを継承したUser classの find_byメソッドを活用して引数がemail： params[:email]の場合にUserモデルを介して取得されるレコードを代入する。
+      2. 1.で定義した@userと、@userとauthenticateメソッドを活用して(params[:password])がハッシュ化されたパスワードが一致するか確認する。trueであれば
         - 変数sessionを活用して、キーが[:user_id]で代入される値が@user.idとしてsessionへ保存されるようにする。
         - 特殊な変数flash[:notice]に対して"ログインしました"を代入する
         - "/posts/index"にリダイレクトする
