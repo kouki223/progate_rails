@@ -2,9 +2,10 @@
 - ActiveRecord::Base classを継承したApplicationRecord classを継承したpost class
   - validates
     - content, {presence: true, length: {maximum: 140}}
-      - contentカラムが存在するか？文字数のMAXは140文字
+      - contentカラムが存在する、文字数が140文字以内の場合にデータベースへ保存する
     - user_id, {presence: true}
-      - user_idカラムが存在するか？
-- メソッド
-  - user
-    - Application recordを継承したuserclassのfind_byメソッドを活用して引数がid: self.user_idの場合に取得されるレコードをUserモデルを介して戻り値として返す
+      - user_idカラムが存在する場合にはデータベースへ保存する
+  - メソッド
+    - user
+      - user　classのfind_byメソッドを活用して引数がid: self.user_idの場合に取得されるレコードをUserモデルを介して戻り値として返す
+        - selfはオブジェクト自身の事
