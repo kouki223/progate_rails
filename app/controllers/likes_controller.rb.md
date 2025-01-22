@@ -13,7 +13,7 @@
           3. 変数@current_userにUserモデルのfind_byメソッドを使い引数がid: session[:user_id]のレコードを取得して代入する
         - params[:post_id]
           - リクエストのpost_id
-        - 変数@likeに対してlike class内のsaveメソッドを使いしてデータベースに保存する
+        - 変数@likeに対してlike class内のsaveメソッドを使いデータベースに保存する
         - "/posts/#{params[:post_id]}"にリダイレクトする
       - destroy
         - 変数@likeに対してApplication recordを継承したlike classのfind_byメソッドを活用して条件に一致するレコードを代入する。
