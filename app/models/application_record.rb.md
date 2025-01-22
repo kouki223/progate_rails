@@ -1,3 +1,8 @@
 - application_record.rb
-- ActiveRecord::Base classを継承したApplicationRecord class
-  - モデルの中で対応するDBが存在しない場合に記載するものらしい
+- ActiveRecord::Base を継承したApplicationRecord class
+  - self.abstract_class = true
+    - 変数self
+      - オブジェクト自身自身の事
+        - ApplicationRecord class
+    - abstract_class
+      - 指定したクラスを抽象クラスにする
