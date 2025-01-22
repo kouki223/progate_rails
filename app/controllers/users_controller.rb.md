@@ -1,46 +1,63 @@
 - users_controller.rb
-  - ApplicationControllerクラスをUsersControllerクラスがクラスの継承をしている
+  - ApplicationControllerを継承したUsersController　class
   - before_action
     - authenticate_user
       - only(index,show,edit,update)
-        - onlyで指定したアクションが呼び出される時にまずauthenticate_userを実行する
+        1. onlyで指定したアクションが呼び出される時にapplication controller内のauthenticate_userを実行する
+        2. 1.の前にset_current_userを実行する
     - forbid_login_user
       - only(new,create,login_from,login)
-        - onlyで指定したアクションが呼び出される時にまずorbid_login_userを実行する
+        1. onlyで指定したアクションが呼び出される時にまずforbid_login_userを実行する
+        2. 1.の前にset_current_userを実行する
     - ensure_correct_user
       - only(edit,update)
-        - onlyで指定したアクションが呼び出される時にまずensure_correct_userを実行する
+        1. onlyで指定したアクションが呼び出される時にまずensure_correct_userを実行する
+        2. application controller内のauthenticate_userを実行する
+        3. 2.の前にset_current_userを実行する
   - メソッド
     - index
       - 変数@userに対してapplication recordを継承したUser classのallメソッドを使いUserモデルを介してusersテーブルのレコードを全て取得し、配列にして代入している
     - show
-      - 変数@userに対してapplication recordを継承したUser classの find_byメソッドを活用して引数がid：params[:id]の場合にUserモデルを介して取得されるレコードを代入している
+      - 変数@userに対してapplication recordを継承したUser classのfind_byメソッドを活用して引数がid： params[:id]の場合にUserモデルを介して取得されるレコードを代入している
+        - params[:id]
+          - リクエストのid
     - new
       - 変数＠userに対してapplication recordを継承したUser classのnewメソッドを使って新しいインスタンスを作成して代入している
     - create
-      - 変数＠userに対してapplication recordを継承したUser classのnewメソッドを使って新しいインスタンスを作成する。この時、引数としてnameカラムにはparams[:name]をemailカラムにはparams[:email]を、image_nameカラムには default_user.jpgを、passwordカラムにはparams[:password]を設定する。
-      - もし、変数＠userに対してapplication recordを継承したUser classのsaveメソッドを使いデータベースへの保存が成功した場合には
-        - 変数sessionを活用して、キーが[:user_id]で代入される値が@user.idとしてsessionへ保存されるようにする。
-        - 特殊な変数flash[:notice]に"ユーザー情報を編集しました"を代入する
-        - /users/#{@user.id}へリダイレクトするようにする。
-      - 保存が成功する以外の場合には、users/newにrenderするようにする事で直接Viewが表示されるようにする。
+      - 変数＠userに対してapplication recordを継承したUser classのnewメソッドを使って新しいインスタンスを作成する。
+      - 引数
+        - nameカラム　params[:name]
+        - emailカラム params[:email]
+        - image_nameカラム default_user.jpg
+        - passwordカラム　params[:password]
+          - paramsはリクエストからのデータ
+      - もし、変数＠userに対してapplication recordを継承したUser classのsaveメソッドを使いtrueの場合には
+        1. 変数sessionのキーが[:user_id]である場合の値が@user.idとなるようにする。
+        2. 特殊な変数flash[:notice]に"ユーザー情報を編集しました"を代入する
+        3. /users/#{@user.id}へリダイレクトするようにする。
+      - true以外の場合には
+        - "users/new"にrenderする
     - edit
-      - 変数＠userに対してapplication recordを継承したUser classの find_byメソッドを活用して引数がid：params[:id]の場合にUserモデルを介して取得されるレコードを代入している。
+      - 変数＠userに対してapplication recordを継承したUser classの find_byメソッドを使って引数がid：params[:id]の場合にUserモデルを介して取得されるレコードを代入している。
+        - params[:id]
+          - リクエストのid
     - update
-      - 変数＠userに対してapplication recordを継承したUser classの find_byメソッドを活用して引数がid：params[:id]の場合にUserモデルを介して取得されるレコードを代入する
-      - 変数＠userのnameカラムに特殊な変数params[:name]を代入する
-      - 変数＠userのemailカラムに特殊な変数params[:name]を代入する
-      - もし、params[:image]がtrueの場合
-        - 変数＠userのimage_nameに"#{@user.id}.jpg"を代入する
-        - imageにparams[:image]を代入する
-        - Fileクラス内のbinwriteメソッドを活用して"public/user_images/#{@user.image_name}"へimageに対してreadメソッドを活用したものを保存する
-      - もし、＠user.saveがtrueの場合、
-        - 特殊な変数flash[:notice]にに対して"ユーザー情報を編集しました"を代入する
-        - "/users/#{params[:id]}"にリダイレクトされるようにする
-      - その他であれば
+      1. 変数＠userに対してapplication recordを継承したUser classの find_byメソッドを使って引数がid：params[:id]の場合にUserモデルを介して取得されるレコードを代入する
+      2. 変数＠userのnameカラムにparams[:name]を代入する
+      3. 変数＠userのemailカラムに特殊な変数params[:name]を代入する
+         - params[:カラム名]
+           - リクエストから送られてきたデータ 
+      4. もし、params[:image]がtrueの場合
+        1. 変数＠userのimage_nameカラムに"#{@user.id}.jpg"を代入する
+        2. imageにparams[:image]を代入する
+        3. Fileクラス内のbinwriteメソッドを活用してimageに対してreadメソッドを活用したものを"public/user_images/#{@user.image_name}"に保存する
+      5. もし、＠user.saveがtrueの場合、
+        1. 特殊な変数flash[:notice]にに対して"ユーザー情報を編集しました"を代入する
+        2. "/users/#{params[:id]}"にリダイレクトする
+      6. true以外であれば
         - "users/edit"へrenderされるようにする
     - login_form
-
+      - login_form.html.erbをViewへ渡す
     - login
       - 変数@userに対してapplication recordを継承したUser classの find_byメソッドを活用して引数がemail： params[:email]の場合にUserモデルを介して取得されるレコードを代入する。
       - もし、@userと、@userとauthenticateメソッドを活用して(params[:password])がハッシュ化されたパスワードが一致するか確認する。trueであれば
