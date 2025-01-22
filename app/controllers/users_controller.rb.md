@@ -60,23 +60,28 @@
       - login_form.html.erbをViewへ渡す
     - login
       1. 変数@userに対してapplication recordを継承したUser classの find_byメソッドを活用して引数がemail： params[:email]の場合にUserモデルを介して取得されるレコードを代入する。
-      2. 1.で定義した@userと、@userとauthenticateメソッドを活用して(params[:password])がハッシュ化されたパスワードが一致するか確認する。trueであれば
+      2. 1.で定義した@userと、@userとauthenticateメソッドを活用してparams[:password]がハッシュ化されたパスワードと一致するか確認する。trueであれば
         - 変数sessionを活用して、キーが[:user_id]で代入される値が@user.idとしてsessionへ保存されるようにする。
         - 特殊な変数flash[:notice]に対して"ログインしました"を代入する
         - "/posts/index"にリダイレクトする
-      - true以外であれば、
+      3. true以外の場合
         - @error_messageに"メールアドレスまたはパスワードが間違っています"を代入する
         - ＠emailにparams[:email]を代入する
         - @passwordにparams[:password]を代入する
-        - "users/login_form"にrenderされて直接Viewが表示されるようにする
+        - "users/login_form"にrenderする
     - logout
-      - session[:user_id]にnillを代入する
-      - flash[:notice]に"ログアウトしました"を代入する
-      - "/login"にリダイレクトする
+      1. session[:user_id]にnillを代入する
+      2. flash[:notice]に"ログアウトしました"を代入する
+      3. "/login"にリダイレクトする
     - likes
-      - 変数＠userに対してapplication recordを継承したUser classのfind_byメソッドを活用して引数がid：params[:id]の場合にUserモデルを介して取得されるレコードを代入する
-      - 変数＠likesに対してapplication recordを継承したLike classのwhereメソッドを活用して引数がuser_id: @user.idの条件に一致するレコードを代入する
+      1. 変数＠userに対してUser classのfind_byメソッドを活用して引数がid：params[:id]の場合に取得されるレコードを代入する
+         - paramsはリクエストのid 
+      2. 変数＠likesに対してapplication recordを継承したLike classのwhereメソッドを使って条件ががuser_idカラムが@user.idに一致するレコードを代入する
     - ensure_correct_user
-      - もし、@current_user.idとparams[:id].to_iが異なる場合には
+      - もし、@current_user.idとparams[:id].to_iが異なる場合に処理を実行する
+        - @current_user.id
+          1. edit.updateアクションが実行される前にauthenticate_userが実行される
+          2. authenticate_userが実行される前にset_current_userが実行されている。
+          3. set_current_userで@current_user.idに対してUser classのfind_byメソッドを使い引数がid: session[:user_id]の場合に取得されるレコードが代入されている
         - flash[:notice]に"権限がありません"を代入する
         - "/posts/index"にリダイレクトする
