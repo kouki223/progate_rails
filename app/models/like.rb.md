@@ -1,6 +1,7 @@
-- ActiveRecord::Base classを継承したApplicationRecord classを継承したlike class
+- like.rb
+- ApplicationRecord classを継承したlike class
   - validates
     - user_id, {presence: true}
-      - user_idカラムに対して存在するかどうか？バリデーションをかける
+      - user_idカラムが存在する場合のみにデータベースへ保存する
     - post_id, {presence: true}
-      - post_idカラムに対して存在するかどうか？バリデーションをかける
+      - post_idカラムが存在する場合のみにデータベースへ保存する
