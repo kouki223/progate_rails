@@ -1,0 +1,14 @@
+- new.html.erb
+- 新規投稿ページ
+  - form_tag("/posts/create") do
+    - "/posts/create"へ入力内容をリクエストとして送るメソッド
+      - @post.errors.full_messages.each do |message|
+        - @post
+          - postsコントローラーのnewアクションでnewメソッドを使い新しくインスタンスを作成し代入した変数
+        - errors
+          - エラーメッセージが配列になっているメソッド
+        - full_messages
+          - errorsと組み合わせる事でエラー内容の出力をする事ができる
+      - <textarea name="content"><%= @post.content %></textarea>
+        - フォーム入力内容にname属性をつけて、値はcontentとする
+        - 入力内容を@post.contentとする
