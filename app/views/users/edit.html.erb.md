@@ -1,0 +1,23 @@
+- edit.html.erb
+- ユーザ情報の編集ページ
+  - <% @user.errors.full_messages.each do |message| %>
+    - 配列となっているエラーメッセージを変数messageへ代入する繰り返し処理
+      - @user
+        - usersコントローラーのeditアクション内で定義された変数
+      - errors
+        - エラーメッセージが配列になっているメソッド
+      - full_messages
+        - エラーメッセージを表示するメソッド
+  - <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
+    - リクエストの内容を"/users/#{@user.id}/update"へ送信する
+      - {multipart: true}
+        - trueを指定する事で複数のデータ形式を扱う事ができるようになる
+          - 指定しない場合には全て文字列と認識されてしまう
+    - <input value="<%= @user.name %>" name="name">
+      - 初期値を@user.nameとする。name属性をつけて値はnameにする
+    - <input name="image" type="file">
+      - name属性をつけて値はimageとする。typeはfileを指定する
+        - type="file"
+          - １つまたは複数のファイルを端末からアップロードできる
+    - <input value="<%= @user.email %>" name="email">
+      - 初期値を@user.emailとして、name属性をつけて値はemailとする
