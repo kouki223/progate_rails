@@ -1,9 +1,45 @@
 - application.html
+- 共通ページの表示内容
   - html宣言
     - html開始タグ
       - head開始タグ
-        - title開始タグ　Hello titel終了タグ
+        - csrf_meta_tags
+          - 悪意のあるCSRFに対するセキュリティのコード
+        - csp_meta_tag
+          - 同じオリジンのJavaScriptだけが実行可能になるCSP対策のコード
+        - stylesheet_link_tag
+          - CSSをapp/assets/stylesheets内で管理する際に必要なコード
+        - javascript_include_tag
+        - javascript_include_tag
+          - アセットパイプラインと呼ばれJavaScriptやCSS,画像などを効率的に扱う仕組み
+            - 'application'でapplication.htmlを読み込んでいる
       - head終了タグ
       - body開始タグ
+        - header
+          - div header-logo
+            - もし、@current_userがtrueの場合には
+              - テキストリンクTweetAppを表示する。リンク先は”/posts/index”
+            - trueではない場合には
+              - テキストリンクTweetAppを表示する。リンク先は”/“
+          - div
+          - div header-menus
+            - もし、@current_userがtrueの場合には
+              - テキストリンク@current_user.nameを表示する。リンク先は"/users/#{@current_user.id}"
+              - テキストリンク投稿一覧を表示する。リンク先は"/posts/index"
+              - テキストリンク新規投稿を表示する。リンク先は"/posts/new"
+              - テキストリンクユーザー一覧を表示する。リンク先は"/users/index"
+              - テキストリンクログアウトを表示する。リンク先は"/logout", {method: "post"}
+            - true以外の場合には
+              - テキストリンクTweetAppとはを表示する。リンク先は"/about"
+              - テキストリンク新規登録を表示する。リンク先は"/signup"
+              - テキストリンクログインを表示する。リンク先は"/login"
+          - div
+        - header終了タグ
+        - もし、lash[:notice]がtrueの場合
+          - div flash
+            - flash[:notice]を出力する
+        - yield
+          - 共通ページが表示できるようにするメソッド
+          - 共通ページを表示したいViewファイルでも記載する
       - body終了タグ
     - html終了タグ
