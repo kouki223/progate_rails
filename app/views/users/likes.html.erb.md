@@ -1,0 +1,69 @@
+- likes.html.erb
+- ユーザ詳細ページとそのユーザがいいねした投稿一覧表示
+- <div class="user">
+  - <img src="<%= "/user_images/#{@user.image_name}" %>">
+    - #{@user.image_name}
+      - users_controllerで定義した@userのimage_nameカラムに保存されているURLを使っている
+  - <%= @user.name %>
+    - users_controllerで定義した@userのname
+  - <%= @user.email %>
+    - users_controllerで定義した@userのemail
+  - <% if @user.id == @current_user.id %>
+    - URLのパラメーターのidとログインしているユーザのidが同じであれば
+      - @user.id
+        - usersコントローラーで定義した@userのid
+      - @current_user.id
+        - applicationコントローラーのset_current_userで定義した変数
+  - <%= link_to("編集", "/users/#{@user.id}/edit") %>
+    - リンクテキスト編集、リンク先は"/users/#{@user.id}/edit"
+      - #{@user.id}
+        - usersコントローラーで定義した変数
+          - URLのパラメーターからidを取得してレコードを代入した変数
+            - 表示しているユーザの事
+- <ul class="user-tabs">
+  - <%= link_to("投稿", "/users/#{@user.id}") %>
+    - テキストリンク投稿、リンク先は"/users/#{@user.id}"
+      - #{@user.id}
+        - usersコントローラーで定義した変数
+          - URLのパラメーターから取得したidのレコードが代入された変数
+    - ユーザ詳細ページへのリンクになる
+  - <%= link_to("いいね!", "/users/#{@user.id}/likes") %>
+    - テキストリンクいいね！、リンク先は"/users/#{@user.id}/likes"
+      - - #{@user.id}
+        - usersコントローラーで定義した変数
+          - URLのパラメーターから取得したidのレコードが代入された変数
+- <% @likes.each do |like| %>
+  - usersコントローラーで定義したuser_idカラムが@user.idと一致するレコードが配列で代入されている変数@likesに対して変数likeに配列の要素を代入する繰り返し処理
+    - user_id
+      - likes tabelのusersテーブルとの外部キー
+    - @user.id
+      - usersコントローラーで定義したURLのパラメーターから取得したid
+    - @likes
+      - likes table内のURLのパラメーターから取得したidと一致するレコードのuser_idを代入した変数
+        - ユーザ詳細ページに表示しているユーザがいいねをした投稿の事
+    - <% post = Post.find_by(id: like.post_id)%> 
+      - 変数postに対してpost classのfind_byメソッドを活用してidカラムがlike.post_idであるレコードを代入する
+        - like.post_id
+          - post_id
+            - likes tabelのpost tableとの外部キー
+          - URLのパラメーターから取得したidと一致するレコードのuser_idが代入された変数likeのレコード内のpost_idと一致するレコードを代入する
+- <div class="post-left">
+  - <img src="<%= "/user_images/#{post.user.image_name}" %>">
+    - like.hltml内で定義された変数postのuser.image_nameカラムのURLに対応する画像を表示する
+- <div class="post-user-name">
+  - <%= link_to(post.user.name, "/users/#{post.user.id}") %>
+    - テキストリンクがpost.user.name、リンク先が"/users/#{post.user.id}"
+      - post.user.name
+         - 変数postに代入されたレコードのuser.nameカラム
+      - "/users/#{post.user.id}"
+        - 変数postに代入されたレコードのuser.idカラム
+    - いいねした投稿のユーザ名の表示、ユーザー詳細ページへのテキストリンク化をしている
+  - <%= link_to(post.content, "/posts/#{post.id}") %>
+    - テキストリンクがpost.content、リンク先が"/posts/#{post.id}"
+      - post.content
+        - 変数postに代入されたレコードのcontent
+          - いいねした投稿の投稿内容
+      - "/posts/#{post.id}"
+        - 変数postに代入されたレコードのid
+          - 投稿詳細ページへのリンク
+    - いいねした投稿内容の表示と投稿詳細ページへのテキストリンク化
