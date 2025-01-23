@@ -1,5 +1,5 @@
 - likes_controller.rb
-  - ApplicationController classを継承したLikesController class
+  - [ApplicationController](./users_controller.rb) classを継承したLikesController class
     - before_action
       - authenticate_user
         - application controller内のauthenticate_userをLikesコントローラー内のアクションが実行される前に行う
