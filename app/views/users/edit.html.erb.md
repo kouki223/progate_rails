@@ -8,6 +8,10 @@
         - エラーメッセージが配列になっているメソッド
       - full_messages
         - エラーメッセージを表示するメソッド
+      - each
+        - 全ての要素に対してブロック内の処理を実行するメソッド
+      - message
+        - レスポンスの内容
   - <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
     - リクエストの内容を"/users/#{@user.id}/update"へ送信する
       - {multipart: true}
