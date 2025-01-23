@@ -1,2 +1,13 @@
+- edit.html.erb
 - 投稿編集ページ
-  - 
+  - div main posts-new
+    - div container
+      - div heading
+        - form_tagメソッドを使いリクエスト内容を送信する。
+          - リンク先は"/posts/#{@post.id}/update"
+            - @post.errors.full_messages.each do |message|
+            - エラーメッセージの内容表示
+              - @postはpostsコントローラーでeditアクションを実行した時に定義したid params[:id]のレコードが代入された変数
+            - <textarea name="content"><%= @post.content %></textarea>
+              - textareaに入力された内容にname属性を"content"としてつける
+              - 入力内容は@post.contentとする
