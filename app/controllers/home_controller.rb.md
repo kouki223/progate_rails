@@ -1,5 +1,5 @@
 - home_controller.rb
-- ActionController::Baseを継承したApplicationControllerを継承したHomeController class
+- ActionController::Baseを継承した[applicationController](./application_controller.rb.md)を継承したHomeController class
 
   - before_action
     - forbid_login_user
