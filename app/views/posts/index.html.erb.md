@@ -1,0 +1,10 @@
+- div main posts-index
+  - div container
+    - div users-heading
+      - postコントローラーで定義した変数@postsの配列を変数postに対して代入する、繰り返し処理を実行する。
+        - <img src="<%= "/user_images/#{post.user.image_name}" %>">
+          - 代入したpostに対応するusersコントローラーでuser.image_nameとしてデータベースに保存した画像を表示する。
+        - <%= link_to(post.user.name, "/users/#{post.user.id}") %>
+          - テキストリンクpost.user.nameを表示して、リンク先を/users/#{post.user.id}にする
+        - <%= link_to(post.content, "/posts/#{post.id}") %>
+          - テキストリンクpost.contentを表示して、リンク先を/posts/#{post.id}にする
