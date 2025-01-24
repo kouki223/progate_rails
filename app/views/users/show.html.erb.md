@@ -1,0 +1,47 @@
+- show.html.erb
+- ユーザー詳細ページとそのユーザの投稿一覧ページ
+  - <img src="<%= "/user_images/#{@user.image_name}" %>">
+    - ユーザが登録した画像 or defolutで登録されている画像を表示する
+  - <%= @user.name %>
+    - userコントローラーjのshowアクションで定義した変数のname
+  - <%= @user.email %>
+    - userコントローラーjのshowアクションで定義した変数のemail
+  - <% if @user.id == @current_user.id %>
+    - @user.id
+      - usersコントローラー内でparams[:id]としてURLのパラメーターから取得したid
+        - 表示しているユーザのid
+    - @current_user.id
+      - applicationcontoroller内のset_current_userでsession[:user_id]としているユーザのid
+        - session(ログインしているユーザ)のid
+    - 表示しているユーザとログインしているユーザのidが一致する場合に処理を行うif文
+  - <%= link_to("編集", "/users/#{@user.id}/edit") %>
+    - テキストリンク編集、リンク先は"/users/#{@user.id}/edit"
+  - <li class="active"> 選択内容に応じて表示画面を切り替える
+    - <%= link_to("投稿", "/users/#{@user.id}") %>
+      - テキストリンク投稿、リンク先は"/users/#{@user.id}"
+        - "/users/#{@user.id}"
+          - #{@user.id}
+            - usersコントローラーで定義した変数
+              - URLのパラメーターから取得したidのレコードが代入された変数
+                - ユーザ詳細ページへのリンクになる事でそのユーザが登録した投稿一覧のページになる
+    - <%= link_to("いいね!", "/users/#{@user.id}/likes") %>
+      - テキストリンクいいね、リンク先は"/users/#{@user.id}/likes"
+        - #{@user.id}
+          - usersコントローラーで定義した変数
+            - URLのパラメーターから取得したidのレコードが代入された変数
+              - ユーザがいいねした投稿一覧の表示
+  - <% @user.posts.each do |post| %>
+    - @user
+      - userコントローラーのshowアクションで定義した変数
+        - URLのパラメーターから取得したidに対応するuserモデルを介してusers tableのレコードを取得して代入した変数
+          - 表示しているユーザのレコード
+      - posts
+        - @userに対してuserモデルで定義したpostsメソッドを呼び出している
+          - Post.where(user_id: self.id)
+            - Post tabbleのuser_idと自身のidが一致する条件のレコードを呼び出して戻り値として返すメソッド
+        - <%= "/user_images/#{post.user.image_name}" %>
+          - 繰り返し処理で定義した変数postのuser.image_nameカラムのURLを元に対応する画像を表示する
+        - <%= link_to(post.user.name, "/users/#{post.user.id}") %>
+          - テキストリンクpost.user.name、リンク先が"/users/#{post.user.id}"とする
+        - <%= link_to(post.content, "/posts/#{post.id}") %>
+          - テキストリンクpost.content、リンク先が"/posts/#{post.id}"とする
