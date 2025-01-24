@@ -1,0 +1,30 @@
+- new.html.erb
+- 新規ユーザ登録ページ
+  - <% @user.errors.full_messages.each do |message| %>
+    - errors.full_messagesに格納されたエラーメッセージを要素の数、変数messagemに代入してブロック内の処理を行う繰り返し処理
+      - @user
+        - usersコントローラーで定義した変数
+      - errors
+        - エラーメッセージが配列で格納されたメソッド
+      - full_messages
+        - エラーメッセージを表示するためのメソッド
+  - <%= message %>
+    - 繰り返し処理で定義した変数
+  - <%= form_tag("/users/create") do %>
+    - "/users/create"にリクエスト内容を送信するメソッド
+  - <input name="name" value="<%= @user.name %>">
+    - inputタグ
+      - name属性をつけて値はnameとする
+      - 初期値、valueを@user.nameとする
+        - @user
+          - userコントローラーのnewアクションで定義された変数
+  - <input name="email" value="<%= @user.email %>">
+    - inputタグ
+      - name属性をつけて値は"email"とする
+      - 初期値、valueを@user.emailとする
+  - <input name="password" type="password" value="<%= @user.password %>">
+    - inputタグ
+      - name属性をつけて値は"password"とする
+      - フォームのtypeを"password"に指定する
+        - 入力した値が⚫️で表示されるようにする
+      - 初期値、valueを@user.emailとする
