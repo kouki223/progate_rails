@@ -4,10 +4,9 @@
     - パスワードをハッシュ化してデータベースへ保存するメソッド
   - validates
     - name, {presence: true}
-      - nameカラムが存在する場合にはデータベースへ保存する
+      - nameカラムが存在するか確認するメソッド
     - email, {presence: true, uniqueness: true}
-      - emailカラムが存在する、他と被っていない場合にはデータベースへ保存する
-  - メソッド
+      - emailカラムが存在するか？また、他とデータが被っていないか確認するメソッド
     - posts
       - return
         - User classのwhereメソッドを活用して条件がuser_idカラムがself.idに一致するレコードをPostモデルを介して取得して戻り値として返す

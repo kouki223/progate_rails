@@ -2,6 +2,6 @@
 - ApplicationRecord classを継承したlike class
   - validates
     - user_id, {presence: true}
-      - user_idカラムが存在する場合のみにデータベースへ保存する
+      - user_idカラムが存在するかどうか？
     - post_id, {presence: true}
-      - post_idカラムが存在する場合のみにデータベースへ保存する
+      - post_idカラムが存在するかどうか？
