@@ -5,18 +5,20 @@
       - only(index,show,edit,update)
         1. onlyで指定したアクションが呼び出される時にapplication controller内のauthenticate_userを実行する
         2. 1.の前にset_current_userを実行する
+        - ログインしているユーザーのみがindex,show,edit,updateアクションを実行できるようにするメソッド
     - forbid_login_user
       - only(new,create,login_from,login)
         1. onlyで指定したアクションが呼び出される時にまずforbid_login_userを実行する
         2. 1.の前にset_current_userを実行する
+        - 新たなアカウント作成やログイン処理などを実行しようとした際に、すでにログイン済みの場合にはログイン済みというメッセージを表示してindexページへリダイレクトするメソッド
     - ensure_correct_user
       - only(edit,update)
-        1. onlyで指定したアクションが呼び出される時にまずensure_correct_userを実行する
-        2. application controller内のauthenticate_userを実行する
-        3. 2.の前にset_current_userを実行する
+        1. onlyで指定したアクションが呼び出される時にensure_correct_userメソッドを実行する
+        2. ログイン中のユーザーとURLのパラメーターから受け取るユーザー情報に相違がある場合にはログイン権限がありませんとフラッシュメッセージを表示する
+        - ユーザー情報を編集する際にログインしている本人のみが設定できるようにした。 
   - メソッド
     - index
-      - 変数@userに対してapplication recordを継承したUser classのallメソッドを使いUserモデルを介してusersテーブルのレコードを全て取得し、配列にして代入している
+      - 変数@userに対してapplication recordを継承したuser classのallメソッドを使いuserモデルを介してusersテーブルのレコードを全て取得し、配列にして代入している
     - show
       - 変数@userに対してapplication recordを継承したUser classのfind_byメソッドを活用して引数がid： params[:id]の場合にUserモデルを介して取得されるレコードを代入している
         - params[:id]
@@ -31,7 +33,7 @@
         - image_nameカラム default_user.jpg
         - passwordカラム　params[:password]
           - paramsはリクエストからのデータ
-      - もし、変数＠userに対してapplication recordを継承したUser classのsaveメソッドを使いtrueの場合には
+      - もし、変数＠userに対してapplication recordを継承したuser classのsaveメソッドを使った結果、真偽値がtrueの場合には
         1. 変数sessionのキーが[:user_id]である場合の値が@user.idとなるようにする。
         2. 特殊な変数flash[:notice]に"ユーザー情報を編集しました"を代入する
         3. /users/#{@user.id}へリダイレクトするようにする。

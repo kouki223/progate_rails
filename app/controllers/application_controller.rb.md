@@ -2,8 +2,7 @@
 - ActionController::Baseを継承したApplicationController　class
   - before_action 
     - set_current_user
-      - アクションの前にset_current_userを実行する
-
+      - application_controller内のアクションのアクションを実行する前にset_current_userを実行する
   - メソッド
     - set_current_user
       - 変数@current_userに対してapplication recordを継承したuser classのfind_byメソッドを使って引数がid: session[:user_id]で取得されるレコードをuserモデルを介して代入する。

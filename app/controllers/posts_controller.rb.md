@@ -3,6 +3,7 @@
   - before_action
     - authenticate_user
       1. authenticate_userが実行される前にApplication controllerのset_current_userが実行される
+      2. @current_userにレコードが代入されるか？でログインしているかしていないかを判断するメソッド
     - ensure_correct_user
       1. ensure_correct_userが実行される前にauthenticate_userが実行される
       2. 1.の前にApplication controllerのset_current_userが実行される
@@ -11,15 +12,15 @@
         - edit,update,destroyアクションが実行される前に実行される
   - メソッド
     - index
-      1. 変数@postsにapplication recordを継承したPostモデルのallメソッドを使いPostsテーブル全てのレコードを配列にして代入する。
+      1. 変数@postsにapplication recordを継承したpostモデルのallメソッドを使いPostsテーブル全てのレコードを配列にして代入する。
       2. orderメソッドを活用して降順に並び替える
     - show
-      1. 変数＠postにPostモデルのfind_byメソッドを使いレコードを代入する
+      1. 変数＠postにpostモデルのfind_byメソッドを使いレコードを代入する
         - 引数がid: params[:id]
           - params[:id]
             - リクエスト（URL）のid
-      2. 変数＠userに変数＠postのuserカラムを代入する
-      3. 変数@likes_countにLikeモデルのwhereメソッドを活用して条件に一致するレコードを代入する
+      2. 変数＠userに変数＠postのuserを代入する
+      3. 変数@likes_countにlikeモデルのwhereメソッドを活用して条件に一致するレコードを代入する
         - 条件(post_id: @post.id)
           - 投稿のid：1.で定義した@postのid
     - new

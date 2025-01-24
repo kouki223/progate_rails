@@ -13,6 +13,6 @@
       4. onlyでtopアクションのみを指定する
   - メソッド
     - top
-      - top.html.erbをViewへ渡す
+      - home.top.html.erbをViewへ渡す
     - about
-      - about.html.erbをViewへ渡す
+      - home.about.html.erbをViewへ渡す
