@@ -1,0 +1,24 @@
+- login_form.html.erb
+- ログインフォームのページ
+  - <% if @error_message %>
+    - もし、エラーメッセージが存在する場合に処理を実行する
+      - <%= @error_message %>
+        1. usersコントローラー内のloginアクションでUser.find_by(email: params[:email])がtrue以外だっった場合にelseとなる
+        2. @error_messageにエラーメッセージが代入される
+           - find_byメソッドでフォームで入力されたemailがdbのメールアドレスと一致するものがあるかチェックしている
+           - その後にif分を使ってdb登録時にハッシュ化されているパスワードとリクエストのパスワードをハッシュ化したものが一致するか確認している。
+             - find_byメソッドとif文を使う事でemail,passwordの確認をする事ができる
+  - <%= form_tag("/login") do %>
+    - フォームの送信先を"/login"にする
+      - loginアクション(dbの変更はしないのでget)に送る
+    - <input name="email" value="<%= @email %>">
+      - name属性の値をemailに、初期値を@emailとする
+        - @email
+          - usersコントローラーでログインに失敗した際にリクエストの値をparams[:email]として代入した変数
+    - <input type="password" name="password" value="<%= @password %>"
+      - type="password"   
+        - 入力BOXのtypeをpasswordとして入力した値が⚫️で表示されるようjにする
+      - name="password"
+        - name属性をつけて値は"password"とする
+      - value="<%= @password　%>"
+        - usersコントローラーでログインに失敗した際にリクエストの値をparams[:password]として代入した変数
